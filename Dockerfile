@@ -6,7 +6,7 @@ RUN mkdir /tmp/job-api
 COPY . /tmp/job-api
 
 # global install bower and grunt
-RUN cd /tmp/job-api && mvn clean install -DskipTests=true
+RUN mvn -f /tmp/job-api/pom.xml clean install -DskipTests=true
 
 # find the JAR file and move it
 RUN bash -c 'find /tmp/job-api/target -maxdepth 1 -size +1048576c | grep job-definition-api | xargs -I{} mv {} /app.jar'
